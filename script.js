@@ -4,6 +4,7 @@ const instruction = document.getElementById("instruction");
 const buttons = document.getElementById("buttons")
 const scoreDisplay = document.getElementById("scoreDisplay")
 const timeDisplay = document.getElementById("timeDisplay")
+const endScreen = document.getElementById('endScreen')
 
 const colors = ["red", "orange", "yellow", "green", "blue", "purple", "gray", "black", "pink", "darkgray", "darkblue", "brown"];
 const colorCodes = {
@@ -35,15 +36,26 @@ const colorsInChinese = {
     darkblue: "深藍色",
     brown: "棕色"
 };
+const totalTime = 2
 
 let color_now = ""
 let score = 0;
-let time_left = 5;
+let time_left = totalTime;
 let intervalId = null;
 let game_ended = false;
 
-function loadInstructions() {
+function loadReadyMenu() {
     instruction.textContent = "按照文字提示點擊對應顏色的方塊!";
+    buttons.innerHTML = ''
+    document.getElementById("title").style.display = "";
+    clearInterval(intervalId)
+    timeDisplay.innerHTML = ""
+    startBtn.style.display = ""
+    textDisplay.innerHTML = ""
+
+    time_left = totalTime;
+    score = 0;
+    game_ended = false;
 }
 function startGame() {
     document.getElementById("title").style.display = "none";
@@ -52,7 +64,6 @@ function startGame() {
         generate_colorBtn(color)
     });
     generateRandomText()
-    scoreDisplay.textContent = `score: ${score}`;
     timeDisplay.textContent = `time: ${time_left}`
 
     startTimer()
@@ -117,12 +128,32 @@ function buttonClicked(color) {
     }
     generateRandomText();
     scramble();
-    scoreDisplay.textContent = `score: ${score}`;
 }
 
 function endGame() {
     game_ended = true;
     clearInterval(intervalId);
+    endScreen.classList.add('visible')
+    document.getElementById("main").style.opacity = 0.3
+    Array.from(buttons.children).forEach((button) => {
+        button.classList.add("unaccessable")
+    })
+    scoreDisplay.textContent = `分數: ${score}`
+    if (score > getHighScore()) {
+        document.getElementById("newHighScore").display = 'block';
+        setHighScore(score);
+    } else {
+        document.getElementById("newHighScore").display = 'none';
+
+    }
+
+}
+function getHighScore() {
+    let highScore = localStorage.getItem("highScore");
+    return highScore !== null ? parseInt(highScore) : 0
+}
+function setHighScore(score) {
+    localStorage.setItem(score);
 }
 startBtn.addEventListener("click", startGame);
-loadInstructions();
+loadReadyMenu();

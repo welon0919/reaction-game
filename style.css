@@ -7,6 +7,8 @@ body{
     display: flex;
     justify-content: center;
     background-color: rgb(255, 255, 255);
+    height: 100vh;
+    margin: 0;
 }
 #startBtn{
     font-size: 1.5em;
@@ -52,4 +54,54 @@ body{
 }
 #timeDisplay{
     font-size: 2rem;
+}
+
+#dataDisplay{
+    display: flex;
+    justify-content: center;
+}
+#dataDisplay p{
+    margin: 20px 20px;
+}
+
+#endScreen{
+    /* background-color: rgb(41, 133, 203); */
+    padding: 50px;
+    transition: opacity 0.5s ease;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform:  translate(-50%,-50%) scale(0);
+    text-align: center;
+    width: fit-content;
+    aspect-ratio: 1/1;    
+    opacity: 0;
+    z-index: 500;
+    border-radius: 20px;
+}
+#endScreen label{
+    display: block; 
+    margin: 20px;
+
+}
+.visible {
+    opacity: 1 !important;
+    transform: translate(-50%,-50%) scale(1) !important;
+}
+
+.unaccessable{
+    cursor: default;
+    transform: none;
+}
+
+.unaccessable:hover{
+    transform: none;
+}
+.unaccessable:active{
+    transform: none;
+}
+#newHighScore{
+    font-size: 2rem;
+    display: none !important; 
+    color: rgb(250, 254, 0);
 }
