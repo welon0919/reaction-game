@@ -102,6 +102,6 @@ body{
 }
 #newHighScore{
     font-size: 2rem;
-    display: none !important; 
+    opacity: 0;
     color: rgb(250, 254, 0);
 }

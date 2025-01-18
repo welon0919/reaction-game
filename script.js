@@ -36,7 +36,7 @@ const colorsInChinese = {
     darkblue: "深藍色",
     brown: "棕色"
 };
-const totalTime = 2
+const totalTime = 5
 
 let color_now = ""
 let score = 0;
@@ -120,10 +120,8 @@ function scramble() {
 function buttonClicked(color) {
     if (time_left <= 0) return;
     if (color == color_now) {
-        console.log("right!");
         score += 1;
     } else {
-        console.log("wrong!");
         score -= 1;
     }
     generateRandomText();
@@ -140,10 +138,10 @@ function endGame() {
     })
     scoreDisplay.textContent = `分數: ${score}`
     if (score > getHighScore()) {
-        document.getElementById("newHighScore").display = 'block';
+        document.getElementById("newHighScore").style.opacity = 1;
         setHighScore(score);
     } else {
-        document.getElementById("newHighScore").display = 'none';
+        document.getElementById("newHighScore").style.opacity = 0;
 
     }
 
@@ -153,7 +151,7 @@ function getHighScore() {
     return highScore !== null ? parseInt(highScore) : 0
 }
 function setHighScore(score) {
-    localStorage.setItem(score);
+    localStorage.setItem("highScore", score);
 }
 startBtn.addEventListener("click", startGame);
 loadReadyMenu();
