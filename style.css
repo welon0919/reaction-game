@@ -80,7 +80,6 @@ body{
     border-radius: 20px;
 }
 #endScreen label{
-    display: block; 
     margin: 20px;
 
 }
@@ -100,8 +99,66 @@ body{
 .unaccessable:active{
     transform: none;
 }
-#newHighScore{
+#highScoreDisplay{
     font-size: 2rem;
+    color: rgb(254, 207, 0);
+}
+.scoreBlock{
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    border: 10px solid ;
+}
+
+
+#scoreDisplayDiv{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin-bottom: 50px;
+}
+
+
+
+@property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+#newHighScore{
     opacity: 0;
-    color: rgb(250, 254, 0);
+    font-size: 3rem;
+    background-color: hsl(0, 0%, 20%);
+    padding: 10px 50px;
+    color: white;
+    border-radius: 20px;
+    position: relative;
+}
+#newHighScore::after, #newHighScore::before{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    background-image: conic-gradient(from var(--angle), hsl(0, 100%, 50%),hsl(35, 100%, 50%),hsl(58, 97%, 49%),hsl(125, 90%, 46%),hsl(222, 100%, 50%),rgb(191, 0, 255),hsl(0, 100%, 50%));
+    z-index: -1;
+    padding: 5px; 
+    border-radius: 20px;
+    animation: 3s  spin linear infinite
+}
+@keyframes spin{
+    from{
+        --angle: 0deg;
+    }
+    to{
+        --angle: 360deg;
+
+    }
+}
+#newHighScore::before{
+    filter: blur(1.5rem);
+    opacity: 0.5;
+
 }

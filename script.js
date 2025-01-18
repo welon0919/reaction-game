@@ -3,6 +3,7 @@ const startBtn = document.getElementById("startBtn");
 const instruction = document.getElementById("instruction");
 const buttons = document.getElementById("buttons")
 const scoreDisplay = document.getElementById("scoreDisplay")
+const highScoreDisplay = document.getElementById("highScoreDisplay")
 const timeDisplay = document.getElementById("timeDisplay")
 const endScreen = document.getElementById('endScreen')
 
@@ -36,13 +37,14 @@ const colorsInChinese = {
     darkblue: "深藍色",
     brown: "棕色"
 };
-const totalTime = 5
+const totalTime = 60
 
 let color_now = ""
 let score = 0;
 let time_left = totalTime;
 let intervalId = null;
 let game_ended = false;
+
 
 function loadReadyMenu() {
     instruction.textContent = "按照文字提示點擊對應顏色的方塊!";
@@ -136,7 +138,7 @@ function endGame() {
     Array.from(buttons.children).forEach((button) => {
         button.classList.add("unaccessable")
     })
-    scoreDisplay.textContent = `分數: ${score}`
+    scoreDisplay.textContent = `分數:${score}`
     if (score > getHighScore()) {
         document.getElementById("newHighScore").style.opacity = 1;
         setHighScore(score);
@@ -144,6 +146,7 @@ function endGame() {
         document.getElementById("newHighScore").style.opacity = 0;
 
     }
+    highScoreDisplay.textContent = `高分:${getHighScore()}`
 
 }
 function getHighScore() {
